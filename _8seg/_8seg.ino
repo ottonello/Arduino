@@ -13,13 +13,13 @@
   by Scott Fitzgerald
  */
 
-const int a=1;
-const int b=2;
-const int c=3;
-const int d=4;
-const int e=5;
-const int f=6;
-const int g=7;
+const int a=3;
+const int b=4;
+const int c=5;
+const int d=6;
+const int e=7;
+const int f=8;
+const int g=9;
 const int d1=A3;
 const int d2=A2;
 const int d3=A1;
@@ -27,7 +27,7 @@ const int d4=A0;
 
 // the setup function runs once when you press reset or power the board
 void setup() {
-//  Serial.begin(9600);
+  Serial.begin(9600);
   pinMode(a, OUTPUT);
   pinMode(b, OUTPUT);
   pinMode(c, OUTPUT);
@@ -41,12 +41,23 @@ void setup() {
   pinMode(d4, OUTPUT);
 
 }
-int i = 1000;
-
-// the loop function runs over and over again forever
+int i = 0;
+int val = 0;
 void loop() {
-  write(i--);
-  delay(20);
+  int tmp = Serial.read();
+  if(tmp != 0){
+    val = tmp;
+  }
+  write(val);
+  delay(2);
+}
+
+void writeRandom(){
+  if(i++ % 10 == 0) {
+    val = random(9999);
+  }
+  write(val);
+  delay(10);
 }
 
 void write(int num) {
@@ -57,16 +68,16 @@ void write(int num) {
 
   onDigit(d1);
   writeSingleDigit(n4);
-  delay(5);
+  delay(3);
   onDigit(d2);
   writeSingleDigit(n3);
-  delay(5);
+  delay(3);
   onDigit(d3);
   writeSingleDigit(n2);
-  delay(5);
+  delay(3);
   onDigit(d4);
   writeSingleDigit(n1);
-  delay(5);
+  delay(3);
 }
 
 void writeSingleDigit(int n){
@@ -121,36 +132,48 @@ void onDigit(int digit)  {
 }
 
 void onAll(){
-  digitalWrite(a, HIGH);   // turn the LED on (HIGH is the voltage level)
-  digitalWrite(b, HIGH);   // turn the LED on (HIGH is the voltage level)
-  digitalWrite(c, HIGH);   // turn the LED on (HIGH is the voltage level)
-  digitalWrite(d, HIGH);   // turn the LED on (HIGH is the voltage level)
-  digitalWrite(e, HIGH);   // turn the LED on (HIGH is the voltage level)
-  digitalWrite(f, HIGH);   // turn the LED on (HIGH is the voltage level)
-  digitalWrite(g, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(a, HIGH);  
+  digitalWrite(b, HIGH);  
+  digitalWrite(c, HIGH);  
+  digitalWrite(d, HIGH);  
+  digitalWrite(e, HIGH);  
+  digitalWrite(f, HIGH);  
+  digitalWrite(g, HIGH);  
 }
 
+
+void offAll(){
+  digitalWrite(a, LOW);  
+  digitalWrite(b, LOW);  
+  digitalWrite(c, LOW);  
+  digitalWrite(d, LOW);  
+  digitalWrite(e, LOW);  
+  digitalWrite(f, LOW);  
+  digitalWrite(g, LOW);  
+}
+
+
 void doCycle(){
-  digitalWrite(g, LOW);   // turn the LED on (HIGH is the voltage level)
-  digitalWrite(a, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(g, LOW);  
+  digitalWrite(a, HIGH);  
   delay(1000);
-  digitalWrite(a, LOW);   // turn the LED on (HIGH is the voltage level)
-  digitalWrite(b, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(a, LOW);  
+  digitalWrite(b, HIGH);  
   delay(1000);
-  digitalWrite(b, LOW);   // turn the LED on (HIGH is the voltage level)
-  digitalWrite(c, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(b, LOW);  
+  digitalWrite(c, HIGH);  
   delay(1000);              // wait for a second
-  digitalWrite(c, LOW);   // turn the LED on (HIGH is the voltage level)
-  digitalWrite(d, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(c, LOW);  
+  digitalWrite(d, HIGH);  
   delay(1000);              // wait for a second
-  digitalWrite(d, LOW);   // turn the LED on (HIGH is the voltage level)
-  digitalWrite(e, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(d, LOW);  
+  digitalWrite(e, HIGH);  
   delay(1000);              // wait for a second
-  digitalWrite(e, LOW);   // turn the LED on (HIGH is the voltage level)
-  digitalWrite(f, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(e, LOW);  
+  digitalWrite(f, HIGH);  
   delay(1000);              // wait for a second
-  digitalWrite(f, LOW);   // turn the LED on (HIGH is the voltage level)
-  digitalWrite(g, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(f, LOW);  
+  digitalWrite(g, HIGH);  
   delay(1000);            
 }
 
